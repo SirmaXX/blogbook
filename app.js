@@ -8,7 +8,7 @@ const session = require('express-session');
 require('mongoose-type-email');
 
 
-mongoose.connect('mongodb://test:test@ds125195.mlab.com:25195/todobbbb');
+mongoose.connect('mongourl');
 
 
 var userpanel = new mongoose.Schema({
