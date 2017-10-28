@@ -6,9 +6,24 @@ const sendmail = require('sendmail')();
 const validator = require("email-validator");
 const session = require('express-session');
 require('mongoose-type-email');
+const app = express();
 
 
-mongoose.connect('mongourl');
+var url='mongodb://localhost:27017/dayanc';
+var options = {
+  useMongoClient: true,
+  autoIndex: false, // Don't build indexes
+  reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
+  reconnectInterval: 500, // Reconnect every 500ms
+  poolSize: 10, // Maintain up to 10 socket connections
+  // If not connected, return errors immediately rather than waiting for reconnect
+  bufferMaxEntries: 0
+};
+
+mongoose.connect(url, options);
+
+
+
 
 
 var userpanel = new mongoose.Schema({
@@ -70,7 +85,7 @@ var userthepost = new mongoose.Schema({
 var User = mongoose.model('Userpanel', userpanel);
 var Userpost = mongoose.model('Userpost', userthepost);
 
-const app = express();
+
 
 
 
@@ -146,7 +161,7 @@ app.get('/:username', urlencodedParser, (req, res) => {
               result : result,
               doc : doc,
               btoa: (string) => {
-                return new Buffer(string).toString('hex')
+                return new Buffer(string).toString('base64')
               }
             });
           } else {
@@ -156,7 +171,7 @@ app.get('/:username', urlencodedParser, (req, res) => {
               result : result,
               doc : doc,
               btoa: (string) => {
-                return new Buffer(string).toString('hex')
+                return new Buffer(string).toString('base64')
               }
             });
           }
@@ -171,8 +186,8 @@ app.get('/:username', urlencodedParser, (req, res) => {
 });
 
 app.get('/:username/:title/edit/:email', urlencodedParser, (req, res) => {
-  var username = new Buffer(req.params.username, 'hex').toString('utf8');
-  var title = new Buffer(req.params.title, 'hex').toString('utf8');
+  var username = new Buffer(req.params.username, 'base64').toString('utf8');
+  var title = new Buffer(req.params.title, 'base64').toString('utf8');
   if(req.session.username == username){
     User.find({ username : username }, (err, doc) => {
       try{
@@ -189,7 +204,7 @@ app.get('/:username/:title/edit/:email', urlencodedParser, (req, res) => {
                     bariz : 5,
                     word : result[0].word,
                     btoa: (string) => {
-                      return new Buffer(string).toString('hex')
+                      return new Buffer(string).toString('base64')
                     }
                   });
                 } else {
@@ -216,8 +231,8 @@ app.get('/:username/:title/edit/:email', urlencodedParser, (req, res) => {
 });
 
 app.post('/:username/:title/edit/:email', urlencodedParser, (req, res) => {
-  var username = new Buffer(req.params.username, 'hex').toString('utf8');
-  var title = new Buffer(req.params.title, 'hex').toString('utf8');
+  var username = new Buffer(req.params.username, 'base64').toString('utf8');
+  var title = new Buffer(req.params.title, 'base64').toString('utf8');
   if(username != "" && title != ""){
     User.find({ username : username}, (err, doc) => {
       try{
@@ -238,7 +253,7 @@ app.post('/:username/:title/edit/:email', urlencodedParser, (req, res) => {
                   success : 'Successfully saved !',
                   word : result.word,
                   btoa: (string) => {
-                    return new Buffer(string).toString('hex')
+                    return new Buffer(string).toString('base64')
                   }
                 });
               } else {
@@ -252,7 +267,7 @@ app.post('/:username/:title/edit/:email', urlencodedParser, (req, res) => {
                   success : '',
                   word : result.word,
                   btoa: (string) => {
-                    return new Buffer(string).toString('hex')
+                    return new Buffer(string).toString('base64')
                   }
                 });
               }
@@ -273,8 +288,8 @@ app.post('/:username/:title/edit/:email', urlencodedParser, (req, res) => {
 });
 
 app.get('/:username/:title/delete/:email', urlencodedParser, (req, res) => {
-  var username = new Buffer(req.params.username, 'hex').toString('utf8');
-  var title = new Buffer(req.params.title, 'hex').toString('utf8');
+  var username = new Buffer(req.params.username, 'base64').toString('utf8');
+  var title = new Buffer(req.params.title, 'base64').toString('utf8');
   if(username != "" && title != ""){
     if(req.session.username == username){
       try{
@@ -296,30 +311,25 @@ app.get('/:username/:title/delete/:email', urlencodedParser, (req, res) => {
 });
 
 app.get('/:username/:title', urlencodedParser, (req, res) => {
-  var username = new Buffer(req.params.username, 'hex').toString('utf8');
-  var title = new Buffer(req.params.title, 'hex').toString('utf8');
+  var username = new Buffer(req.params.username, 'base64').toString('utf8');
+  var title = new Buffer(req.params.title, 'base64').toString('utf8');
   User.find({ username : username }, (err, doc) => {
     try{
       if(doc[0].username == username){
         Userpost.find({ username : username, title : title }, (error, result) => {
-          if(typeof result !== 'undefined' && result.length > 0){
-            if(req.session.username){
-              res.render('withsessbody', {
-                username : req.session.username,
-                other : username,
-                result : result,
-                title : title
-              });
-            } else {
-              res.render('withoutsessbody', {
-                username : req.session.username,
-                other : username,
-                result : result,
-                title : title
-              });
-            }
+          if(req.session.username){
+            res.render('withsessbody', {
+              username : req.session.username,
+              other : username,
+              result : result,
+              title : title
+            });
           } else {
-            res.send('Title not found');
+            res.render('withoutsessbody', {
+              username : req.session.username,
+              other : username,
+              result : result
+            });
           }
         });
       } else {
@@ -508,6 +518,17 @@ app.post('/user/check/blog', urlencodedParser, (req, res) => {
     }
   });
 });
+
+
+
+app.get('/forgot', urlencodedParser, (req, res) => {
+
+        res.render('forgot');
+      
+
+ 
+});
+
 
 app.listen(3000, () => {
   console.log('App listening on port ' + 3000);
