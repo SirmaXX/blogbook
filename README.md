@@ -7,15 +7,13 @@ A blog page for everyone.
 
 ### Blogbook Node.JS & MongoDB altyapısını kullanarak herkes için oluşturulabilir bir blog sağlar.
 
-======
+------
 
 Lütfen app.js içerisindeki `mongoose.connect('mongourl')` fonksiyonuna mongodb url'nizi eklemeyi unutmayın!
 
-======
+------
 
 #### İndirip başlatmak için :
-
-------
 
   `git clone https://github.com/0DAYanc/blogbook.git
 
