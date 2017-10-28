@@ -14,11 +14,11 @@ A blog page for everyone.
 
 ## İndirip başlatmak için :
 
-  `git clone https://github.com/0DAYanc/blogbook.git
+  `git clone https://github.com/0DAYanc/blogbook.git`
 
-  cd blogbook/ && npm install
+  `cd blogbook/ && npm install`
 
-  npm start`
+  `npm start`
 
 ------
 
