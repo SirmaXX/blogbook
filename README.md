@@ -9,7 +9,6 @@ Blogbook [bir bootstrap](https://startbootstrap.com/template-overviews/freelance
 [![npm version](https://img.shields.io/npm/v/startbootstrap-freelancer.svg)](https://www.npmjs.com/package/startbootstrap-freelancer)
 
 ## Blogbook Node.JS & MongoDB altyapısını kullanarak herkes için oluşturulabilir bir blog sağlar.
-------
 
 ##### Lütfen app.js içerisindeki `mongoose.connect('mongourl')` fonksiyonuna mongodb url'nizi eklemeyi unutmayın!
 
