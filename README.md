@@ -1,5 +1,8 @@
 # Blogbook
-A blog page for everyone.
+Herkes için bir blog sayfası.
+
+## Blogbook nasıl yaratıldı ?
+Blogbook [bir bootstrap](https://startbootstrap.com/template-overviews/freelancer/) teması üzerinden geliştirilip yayınlandı.
 
 ## Status
 [![GitHub license](https://img.shields.io/badge/license-GNU-blue.svg)](https://raw.githubusercontent.com/BlackrockDigital/startbootstrap-freelancer/master/LICENSE)
@@ -21,6 +24,8 @@ A blog page for everyone.
   `npm start`
 
 ------
+
+
 
 Örnek fotoraflar :
 
