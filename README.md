@@ -5,15 +5,14 @@ A blog page for everyone.
 [![GitHub license](https://img.shields.io/badge/license-GNU-blue.svg)](https://raw.githubusercontent.com/BlackrockDigital/startbootstrap-freelancer/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/startbootstrap-freelancer.svg)](https://www.npmjs.com/package/startbootstrap-freelancer)
 
-### Blogbook Node.JS & MongoDB altyapısını kullanarak herkes için oluşturulabilir bir blog sağlar.
+## Blogbook Node.JS & MongoDB altyapısını kullanarak herkes için oluşturulabilir bir blog sağlar.
+------
+
+##### Lütfen app.js içerisindeki `mongoose.connect('mongourl')` fonksiyonuna mongodb url'nizi eklemeyi unutmayın!
 
 ------
 
-Lütfen app.js içerisindeki `mongoose.connect('mongourl')` fonksiyonuna mongodb url'nizi eklemeyi unutmayın!
-
-------
-
-#### İndirip başlatmak için :
+## İndirip başlatmak için :
 
   `git clone https://github.com/0DAYanc/blogbook.git
 
