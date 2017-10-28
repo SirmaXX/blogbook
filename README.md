@@ -26,8 +26,7 @@ Blogbook [bir bootstrap](https://startbootstrap.com/template-overviews/freelance
 
 ## Proje hakkında pratik bilgi :
 
-Bir profili görüntülemek için `www.site.com/kullaniciadi` olarak siteye giriş yapabilirsiniz.
-
+Bir profili görüntülemek için `www.site.com/kullaniciadi` olarak belirlenen kullanıcı profilini görüntüleyebilirsiniz.
 ------
 
 Örnek fotoraflar :
